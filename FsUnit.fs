@@ -15,6 +15,10 @@ module Extensions =
         for a in y do
             list.Add a
         Assert.Contains(x, list)
+
+    [<DebuggerStepThrough>]
+    let shouldBeEmpty (list : 'a seq) = 
+        Assert.IsEmpty(list)
     
     [<DebuggerStepThrough>]
     let shouldNotContain (x : 'a) (y : 'a seq) = 
