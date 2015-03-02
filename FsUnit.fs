@@ -29,3 +29,16 @@ module Extensions =
     
     [<DebuggerStepThrough>]
     let shouldBeGreaterThan (x : 'a) (y : 'a) = Assert.Greater(y, x, sprintf "Expected: %A\nActual: %A" x y)
+
+    [<DebuggerStepThrough>]
+    let shouldFail<'exn when 'exn :> exn> (f : unit -> unit) = 
+        let succeeded = ref false
+        try
+            f()
+            succeeded := true            
+        with
+        | exn -> 
+            if exn :? 'exn then () else
+            failwithf "Exception was not of type %s" <| typeof<'exn>.ToString()
+        if !succeeded then
+            failwith "Operation did not fail."
