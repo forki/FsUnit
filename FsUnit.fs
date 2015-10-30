@@ -35,10 +35,15 @@ module Extensions =
         let succeeded = ref false
         try
             f()
-            succeeded := true            
+            succeeded := true
         with
         | exn -> 
             if exn :? 'exn then () else
             failwithf "Exception was not of type %s" <| typeof<'exn>.ToString()
         if !succeeded then
             failwith "Operation did not fail."
+
+    [<DebuggerStepThrough>]
+    let shouldContainText (x : string) (y : string) = 
+        if y.Contains(x) |> not then
+            failwithf "\"%s\" is not a substring of \"%s\"" x y
