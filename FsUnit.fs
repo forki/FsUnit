@@ -8,6 +8,9 @@ open System.Collections.Generic
 module Extensions = 
     [<DebuggerStepThrough>]
     let shouldEqual (x : 'a) (y : 'a) = Assert.AreEqual(x, y, sprintf "Expected: %A\nActual: %A" x y)
+
+    [<DebuggerStepThrough>]
+    let shouldNotEqual (x : 'a) (y : 'a) = Assert.AreNotEqual(x, y, sprintf "Expected: %A\nActual: %A" x y)
     
     [<DebuggerStepThrough>]
     let shouldContain (x : 'a) (y : 'a seq) = 
