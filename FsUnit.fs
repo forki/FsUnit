@@ -7,10 +7,10 @@ open System.Collections.Generic
 [<AutoOpen>]
 module Extensions = 
     [<DebuggerStepThrough>]
-    let shouldEqual (actual : 'a) (expected : 'a) = Assert.AreEqual(expected, actual, sprintf "Expected: %A\nActual: %A" expected actual)
+    let shouldEqual (expected : 'a) (actual : 'a) = Assert.AreEqual(expected, actual, sprintf "Expected: %A\nActual: %A" expected actual)
 
     [<DebuggerStepThrough>]
-    let shouldNotEqual (actual : 'a) (expected : 'a) = Assert.AreNotEqual(expected, actual, sprintf "Expected: %A\nActual: %A" expected actual)
+    let shouldNotEqual (expected : 'a) (actual : 'a) = Assert.AreNotEqual(expected, actual, sprintf "Expected: %A\nActual: %A" expected actual)
     
     [<DebuggerStepThrough>]
     let shouldContain (x : 'a) (y : 'a seq) = 
