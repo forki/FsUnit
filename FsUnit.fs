@@ -45,6 +45,21 @@ module Extensions =
             failwithf "Exception was not of type %s" <| typeof<'exn>.ToString()
         if !succeeded then
             failwith "Operation did not fail."
+            
+    [<DebuggerStepThrough>]
+    let shouldFailWithMessage<'exn when 'exn :> exn> message (f : unit -> unit) =
+        let succeeded = ref false
+        try
+            f()
+            succeeded := true
+        with
+        | exn ->
+            if exn :? 'exn then
+                exn.Message |> shouldEqual message
+            else
+                failwithf "Exception was not of type %s" <| typeof<'exn>.ToString()
+        if !succeeded then
+            failwith "Operation did not fail."
 
     [<DebuggerStepThrough>]
     let shouldContainText (x : string) (y : string) = 
